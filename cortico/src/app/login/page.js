@@ -6,14 +6,13 @@ export default function SignupPage(){
     return <div>
         <Header />
         <div className="flex items-center justify-center h-screen">
-            <div className="bg-white p-2 ">
+            <form className="flex bg-white p-2 ">
                 <Input placeholder="Email"/>
                 <Input placeholder="Password"/>
-
                 <div className="flex justify-center pt-2">
                 <Button text="Log in"/>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 }
