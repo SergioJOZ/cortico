@@ -2,10 +2,10 @@ import Image from "next/image";
 import Button from "../ui/Button/Button";
 import Link from "next/link";
 
-export default function UrlCard(){
+export default function UrlCard({shortenUrl}){
     return <div className="flex flex-col bg-green-200 rounded-lg mt-2 gap-1 pt-1 mb-2">
         <div className="flex justify-around">
-            <p className="font-semibold">c.rt/link <br/> yutu.com</p>
+            <Link href={"localhost:3000/"+ shortenUrl.shortId} className="font-semibold">{"localhost:3000/"+ shortenUrl.shortId}</Link> <br/> {shortenUrl.originUrl}
             <div className="flex flex-col items-center">
             <Image src={"/images/qrprueba.png"} alt="qr de prueba" width={50} height={50}/>
 
