@@ -1,23 +1,17 @@
 'use client'
-import Header from "@/components/ui/Header/Header";
 import { useEffect } from "react";
-import axios from "axios";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "./actions";
+import Header from "@/components/ui/Header/Header";
 
 
-export default function RedirectPage(params){
-    
+export default async function RedirectPage(params){
     useEffect(() => {
-        const {shortId} = params.params
-        async function getData(){
-            const url = await axios.get("/api/shorter?shortId=" + shortId)
-        }
-        getData()
-
-        
+        redirect(params)
     }, [])
-return <div>
-        <Header />
 
+    
+    return <div>
+        <Header />
+        <h1 className="text-center text-4xl">Redirecting...</h1>
     </div>
 }

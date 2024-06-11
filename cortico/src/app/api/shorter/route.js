@@ -8,14 +8,3 @@ export async function POST(req,res){
     const newShortLink = await ShortLink.create(data)
     return Response.json(newShortLink)
 }
-
-export async function GET(req,res){
-    await mongooseConnect();
-    const searchParams = req.nextUrl.searchParams
-    const shortId = searchParams.get('shortId')
-
-    const url = await ShortLink.findOne({shortId: shortId})
-    console.log(url)
-    
-    return Response.json(url)
-}
