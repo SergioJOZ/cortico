@@ -7,8 +7,7 @@ export default function UrlCard({shortenUrl}){
         <div className="flex justify-around">
             <Link href={"localhost:3000/"+ shortenUrl.shortId} className="font-semibold">{"localhost:3000/"+ shortenUrl.shortId}</Link> <br/> {shortenUrl.originUrl}
             <div className="flex flex-col items-center">
-            <Image src={"/images/qrprueba.png"} alt="qr de prueba" width={50} height={50}/>
-
+            <Image src={shortenUrl.qrCode} alt="prueba" width={100} height={100}/>
             <p className="text-sm">
             <Link href={"/signup"} className="bg-blue-300 rounded-lg pl-1 pr-1 font-bold hover:bg-blue-200">Sign up</Link> or <Link href={"/login"} className="bg-blue-300 rounded-lg pl-1 pr-1 font-bold hover:bg-blue-200">Log in</Link> to see stats about your link
             </p>

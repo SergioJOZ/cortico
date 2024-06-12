@@ -4,27 +4,48 @@ import Input from "../Input/Input";
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import axios from "axios";
-
+import QRCode from "qrcode"
+import isURL from "validator/lib/isURL";
 
 export default function Shorter(){
     const [originUrl, setOriginUrl] = useState("");
     const [shortenUrl, setShortenUrl] = useState("");
     const [shorten, setShorten] = useState(false);
+    const [error, setError] = useState(false)
 
   const handleShorten = async (e) => {
     e.preventDefault()
-    
-    if(originUrl){
-        let shortId = nanoid(5);
 
+    //Validate if origin url is a valid url
+    if(isURL(originUrl)){
+        //generate short id for link
+        let shortId = nanoid(5);
+        
+        //generate qr code for link
+        const urlQR = 'http://localhost:3000/' + shortId;
+        const generateQR = async urlQR => {
+            try {
+              return await QRCode.toDataURL(urlQR)
+            } catch (err) {
+              console.error(err)
+            }
+          }
+        
+        const qrCode =  await generateQR(urlQR)
+
+        //Post data to db
         const newShortLink = await axios.post("/api/shorter", {
             originUrl,
-            shortId
+            shortId,
+            qrCode
         });
 
+        //Set data to state to show it to the user
         setShortenUrl(newShortLink.data)
-        console.log(shortenUrl)
+        setError(false)
         setShorten(true); 
+    }else{
+      setError(true)
     }
   }
 
@@ -36,6 +57,8 @@ export default function Shorter(){
             <Input placeholder="Place your link here..." value={originUrl} onChange={(e) => setOriginUrl(e.target.value)} />
             <Button text="Shorten" type="submit"/>
         </form>
+        {error && <div className="bg-red-300 rounded-lg mt-2">
+          There has been an error, please check if you're passing a valid url</div>}
         {shorten && <UrlCard shortenUrl={shortenUrl}/> }
     </section>
 }

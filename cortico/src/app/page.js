@@ -3,8 +3,6 @@
 import About from "@/components/About/About";
 import Header from "@/components/ui/Header/Header";
 import Shorter from "@/components/ui/Shorter/Shorter";
-import Image from "next/image";
-import { useState } from "react";
 
 export default function Home() {
   
