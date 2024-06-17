@@ -18,11 +18,12 @@ export default function Shorter(){
 
     //Validate if origin url is a valid url
     if(isURL(originUrl)){
+
         //generate short id for link
         let shortId = nanoid(5);
         
         //generate qr code for link
-        const urlQR = 'http://localhost:3000/' + shortId;
+        const urlQR = 'http://' + process.env.NEXT_PUBLIC_URL + shortId;
         const generateQR = async urlQR => {
             try {
               return await QRCode.toDataURL(urlQR)

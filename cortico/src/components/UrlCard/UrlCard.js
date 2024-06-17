@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function UrlCard({shortenUrl}){
     return <div className="flex flex-col bg-green-200 rounded-lg mt-2 gap-1 pt-1 mb-2">
         <div className="flex justify-around">
-            <Link href={"localhost:3000/"+ shortenUrl.shortId} className="font-semibold">{"localhost:3000/"+ shortenUrl.shortId}</Link> <br/> {shortenUrl.originUrl}
+            <Link href={process.env.NEXT_PUBLIC_URL + shortenUrl.shortId} className="font-semibold">{"localhost:3000/"+ shortenUrl.shortId}</Link> <br/> {shortenUrl.originUrl}
             <div className="flex flex-col items-center">
             <Image src={shortenUrl.qrCode} alt="prueba" width={100} height={100}/>
             <p className="text-sm">
